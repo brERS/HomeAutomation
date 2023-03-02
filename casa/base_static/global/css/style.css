@@ -1,0 +1,50 @@
+:root {
+    --nav-color: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 0%, rgb(5, 188, 224) 100%); 
+    --body-color: #eee8e8; 
+    --txt-color: #fff;
+    margin: 0;
+    padding: 0;
+}
+
+
+nav {
+    background: var(--nav-color);
+}
+
+.nav-a {
+    text-decoration: none !important;
+    color: var(--txt-color) !important;
+}
+
+.nav-a:hover {
+    color: #6cccf1 !important;
+}
+
+body {
+    background: var(--body-color);
+}
+
+body > main > article {
+    margin-top: 3.5rem;
+}
+
+
+body > main > article > section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-custom {
+    padding: 1rem;   
+}
+
+.navbar-toggler {
+    border: 1px solid var(--txt-color) !important;
+}
+
+.list-icon {
+    font-weight: bolder;
+    color: var(--txt-color) !important;
+}
+

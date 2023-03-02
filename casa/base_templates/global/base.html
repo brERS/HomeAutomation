@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    {% include 'dog/partials/head.html' %}
+    <title>Casa {% block title %} {% endblock title %} </title>
+</head>
+<body>
+    {% include 'dog/partials/header.html' %}
+    {% block content %} {% endblock content %}
+    {% include 'dog/partials/modal.html' %}
+</body>
+</html>
