@@ -1,0 +1,31 @@
+{% load static %}
+<div class="modal fade" id="Modal" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
+    <div class="modal-dialog  modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ModalLabel">Info</h5>
+            </div>
+            <div class="modal-body">  
+                <div class="loading">
+                    Processando...       
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                </div>    
+                <div id='response'> </div>
+            </div>
+            <div class="modal-footer">
+                <div class="row col-12 d-flex flex-row-reverse">
+                    <div class="col-4">
+                        <button type="button" class="btn btn-outline-primary w-100" data-bs-dismiss="modal">Fechar</button>
+                    </div>
+                    <div class="col-4">
+                        <button type="button" class="btn btn-outline-danger w-100" id='abortwaterflow'>Parar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="{% static 'global/js/progress.bar.js' %}"></script>

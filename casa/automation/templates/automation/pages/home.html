@@ -1,0 +1,73 @@
+{% extends 'global/base.html' %}
+
+{% block title %} | Automações {% endblock title %}
+
+{% block content %}
+    <article>
+        <section class="banner-sections automation">
+            <div class="banner-content p-5 col-md-5">
+                <p class='banner-title ms-5'>
+                    Veja tudo o que já esta
+                    <span class='banner-title-highlight'>automatizado</span> 
+                </p>
+                <p class='banner-subtitle ms-5'>
+                    Descubra como podemos simplificar e melhorar o dia a dia com tecnologia
+                </p>
+            </div>
+        </section>
+        <section class="container-fluid text-center banner-cards">
+            <div class="row col-md-10 offset-md-1">      
+                {% if home == True %} 
+                    <div class="col-md-8 mb-1 text-center banner-cards-cancel">
+                {% else %}
+                    <div class="col-md-12 mb-1 text-center banner-cards-cancel">  
+                {% endif %}   
+                    <div class="text-center">
+                        <ul class="nav nav-tabs-custom p-2">
+                            {% for key, value in tabs.items %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ value.url }}"><i class="bi {{value.icon}}"></i> {{ value.title }} </a>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <div class="row col-12 mt-5">                        
+                        {% for paragraph, paragraph_value in content.info.items %}    
+                            <div class="content-home mb-2">
+                                <div class="p-5 nav-content">
+                                    <div class="nav-content-txt">
+                                        <p class="card-text">{{ paragraph_value.content }}</p>
+                                        <div class="row">
+                                            <p class="d-flex">
+                                                {{ paragraph_value.subcontent }}
+                                            </p>
+                                            {% if paragraph != 'home' %}
+                                                <div class="d-flex flex-row-reverse">
+                                                    <button type="button" class="col-4 btn btn-outline-secondary" id="{{ paragraph_value.button }}" data-bs-toggle="modal"
+                                                    data-bs-target="#Modal"> Executar </button>
+                                                </div>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% if home == True %} 
+                    <div class="col-md-4 mb-1">
+                        <div class="card-home p-2">
+                            <i class="bi bi-info-square"></i>
+                            <p>
+                                Confira a lista completa de funcionalidades automatizadas.
+                            </p>
+                            <p>
+                                Simplifique a vida e comece a aproveitar todos os benefícios da automação residencial!
+                            </p>
+                        </div>
+                    </div>  
+                {% endif %}
+            </div>
+        </section>
+    </article>
+{% endblock content %}

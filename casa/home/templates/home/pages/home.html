@@ -1,0 +1,77 @@
+{% extends 'global/base.html' %}
+
+{% block title %} | Home {% endblock title %}
+
+{% block content %}
+    <article>
+        <section class="banner banner-home">
+            <div class="banner-content p-5 col-md-5">
+                <p class='banner-title ms-5'>
+                    Conheça uma nova forma de  
+                    <span class='banner-title-highlight'>cuidar</span> do lar
+                </p>
+                <p class='banner-subtitle ms-5'>
+                    Automação residencial, um ambiente mais conectado, inteligente e confortável.
+                </p>
+            </div>
+        </section>
+        <section class="container-fluid text-center banner-cards">
+            <div class="row col-md-10 offset-md-1">
+                {% for key, value in cards.items %}
+                
+                    <div class="col-md-4 mb-1">
+                        <div class="card-home p-2">
+                            <i class="bi {{ value.icon }} "></i>
+                            <p> 
+                                {{ value.content }}
+                            </p>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </section>
+        <section class='container-fluid text-center'>
+            <div class="row mt-5 mb-5 col-md-10 offset-md-1">
+                {% for key, value in details.items  %}
+                    {% if forloop.counter|divisibleby:2 %}
+                        <div class="col-md-6 offset-md-6">
+                            <div class="card card-right">
+                    {% else %}
+                        <div class="col-md-6 ms-4">
+                            <div class="card card-left">
+                    {% endif %}
+                            <div class="card-body">
+                            <h4 class="card-title mt-3">{{ value.title }} </h4>
+                            <p class="card-text p-4 card-text-custom">
+                                {{ value.content }} 
+                            </p>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </section>
+        {% for key, value in descriptions.items  %}
+            {% if forloop.counter|divisibleby:2 %}
+                <section class="banner-sections {{ value.background }}">
+                    <div class="sections-content-alter">
+                        <div class="col-md-6">
+            {% else %}
+                <section class="banner-sections {{ value.background }}">
+                    <div class="sections-content">
+                        <div class="col-md-6 offset-md-6">
+            {% endif %}  
+                            <div class="p-5 text-center sections-content-text ">
+                                <h1 class='mb-5'>{{ value.title }}</h1>
+                                {% for paragraph, paragraph_value in value.paragraphs.items %}
+                                    <p >                             
+                                        {{ paragraph_value }}                                 
+                                    </p>
+                                {% endfor %}
+                            </div>
+                        </div>                
+                    </div>
+                </section>        
+        {% endfor %}
+    </article>
+{% endblock content %}
