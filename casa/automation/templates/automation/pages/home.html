@@ -6,11 +6,11 @@
     <article>
         <section class="banner-sections automation">
             <div class="banner-content p-5 col-md-5">
-                <p class='banner-title ms-5'>
+                <p class='banner-title'>
                     Veja tudo o que já esta
                     <span class='banner-title-highlight'>automatizado</span> 
                 </p>
-                <p class='banner-subtitle ms-5'>
+                <p class='banner-subtitle'>
                     Descubra como podemos simplificar e melhorar o dia a dia com tecnologia
                 </p>
             </div>
@@ -41,9 +41,9 @@
                                             <p class="d-flex">
                                                 {{ paragraph_value.subcontent }}
                                             </p>
-                                            {% if paragraph != 'home' %}
+                                            {% if paragraph_value.button %}
                                                 <div class="d-flex flex-row-reverse">
-                                                    <button type="button" class="col-4 btn btn-outline-secondary" id="{{ paragraph_value.button }}" data-bs-toggle="modal"
+                                                    <button type="button" class="btn btn-outline-secondary" id="{{ paragraph_value.button }}" data-bs-toggle="modal"
                                                     data-bs-target="#Modal"> Executar </button>
                                                 </div>
                                             {% endif %}

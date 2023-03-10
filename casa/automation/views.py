@@ -12,7 +12,7 @@ from django.shortcuts import render
 def subnav():
     return {
         'home': {
-            'title': 'home',
+            'title': 'Home',
             'url': 'home',
             'icon': 'bi-house-fill',
         },
@@ -21,18 +21,19 @@ def subnav():
             'url': 'water',
             'icon': 'bi-droplet-half',
         },
-        'luzes': {
-            'title': 'luzes',
-            'url': 'rele:luzes',
-            'icon': 'luzes',
+        'light': {
+            'title': 'Luzes',
+            'url': 'light',
+            'icon': 'bi-lightbulb',
         },
     }
 
 
 def index(request):
+
+    cache.delete('water_long_task_progress')
     context = {
         'tabs': subnav(),
-        'title': 'Tarefas Automatizadas',
         'content':  {
             'info': {
                 'home': {
@@ -53,7 +54,6 @@ def water(request):
 
     context = {
         'tabs': subnav(),
-        'title': 'Tarefas Automatizadas',
         'content':  {
             'info': {
                 'agua': {
@@ -63,6 +63,24 @@ def water(request):
                     ''',
                     'subcontent': 'A torneira será aberta por 1 minuto.',
                     'button': 'waterflow',
+                },
+            },
+        },
+        'home': False,
+    }
+    return render(request, 'automation/pages/home.html', context)
+
+
+def light(request):
+    context = {
+        'tabs': subnav(),
+        'content':  {
+            'info': {
+                'light': {
+                    'content': '''
+                        Em construção...
+                    ''',
+                    'subcontent': 'Em breve você poderá controlar as luzes da casa!',
                 },
             },
         },
@@ -86,12 +104,11 @@ def start_water_flow():
 
     GPIO.output(18, False)
 
-    for value in range(50, 101):
+    for value in range(0, 101):
         cache.set('water_long_task_progress', value, timeout=None)
         sleep(.6)
 
     GPIO.output(18, True)
-    cache.delete('water_long_task_progress')
 
 
 def status_water_flow(request):
@@ -104,5 +121,4 @@ def status_water_flow(request):
 def abort_water_flow(request):
 
     GPIO.output(18, True)
-    cache.delete('water_long_task_progress')
     return HttpResponse(int(True))

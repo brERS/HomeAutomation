@@ -6,19 +6,18 @@
     <article>
         <section class="banner banner-home">
             <div class="banner-content p-5 col-md-5">
-                <p class='banner-title ms-5'>
-                    Conheça uma nova forma de  
+                <p class='banner-title'>
+                    Uma nova forma de
                     <span class='banner-title-highlight'>cuidar</span> do lar
                 </p>
-                <p class='banner-subtitle ms-5'>
+                <p class='banner-subtitle'>
                     Automação residencial, um ambiente mais conectado, inteligente e confortável.
                 </p>
             </div>
         </section>
         <section class="container-fluid text-center banner-cards">
-            <div class="row col-md-10 offset-md-1">
-                {% for key, value in cards.items %}
-                
+            <div class=" row col-md-10 offset-md-1">
+                {% for key, value in cards.items %}                
                     <div class="col-md-4 mb-1">
                         <div class="card-home p-2">
                             <i class="bi {{ value.icon }} "></i>
@@ -31,13 +30,13 @@
             </div>
         </section>
         <section class='container-fluid text-center'>
-            <div class="row mt-5 mb-5 col-md-10 offset-md-1">
+            <div class="mt-5 mb-5 col-md-10 offset-md-1">
                 {% for key, value in details.items  %}
                     {% if forloop.counter|divisibleby:2 %}
                         <div class="col-md-6 offset-md-6">
                             <div class="card card-right">
                     {% else %}
-                        <div class="col-md-6 ms-4">
+                        <div class="col-md-6">
                             <div class="card card-left">
                     {% endif %}
                             <div class="card-body">
