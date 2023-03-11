@@ -5,7 +5,7 @@
 {% block content %}
     <article>
         <section class="banner-sections automation">
-            <div class="banner-content p-5 col-md-5">
+            <div class="banner-content p-5 col-md-5 mt-3">
                 <p class='banner-title'>
                     Veja tudo o que já esta
                     <span class='banner-title-highlight'>automatizado</span> 
@@ -26,7 +26,7 @@
                         <ul class="nav nav-tabs-custom p-2">
                             {% for key, value in tabs.items %}
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ value.url }}"><i class="bi {{value.icon}}"></i> {{ value.title }} </a>
+                                <a class="nav-link" href="{% url value.url %}"><i class="bi {{value.icon}}"></i> {{ value.title }} </a>
                             </li>
                             {% endfor %}
                         </ul>

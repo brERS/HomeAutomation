@@ -1,7 +1,8 @@
 import threading
 from time import sleep
 
-import RPi.GPIO as GPIO
+import psutil
+# import RPi.GPIO as GPIO
 from django.core.cache import cache
 from django.http import HttpResponse
 from django.shortcuts import render
@@ -13,17 +14,17 @@ def subnav():
     return {
         'home': {
             'title': 'Home',
-            'url': 'home',
+            'url': 'automation:home',
             'icon': 'bi-house-fill',
         },
         'water': {
             'title': 'Água',
-            'url': 'water',
+            'url': 'automation:water',
             'icon': 'bi-droplet-half',
         },
         'light': {
             'title': 'Luzes',
-            'url': 'light',
+            'url': 'automation:light',
             'icon': 'bi-lightbulb',
         },
     }
