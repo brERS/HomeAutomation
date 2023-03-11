@@ -46,6 +46,7 @@ def index(request):
             },
         },
         'home': True,
+        'js': False,
     }
     return render(request, 'automation/pages/home.html', context)
 
@@ -67,6 +68,7 @@ def water(request):
             },
         },
         'home': False,
+        'js': True,
     }
     return render(request, 'automation/pages/home.html', context)
 
@@ -85,6 +87,7 @@ def light(request):
             },
         },
         'home': False,
+        'js': False,
     }
     return render(request, 'automation/pages/home.html', context)
 

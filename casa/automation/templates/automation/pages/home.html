@@ -54,7 +54,7 @@
                         {% endfor %}
                     </div>
                 </div>
-                {% if home == True %} 
+                {% if home %} 
                     <div class="col-md-4 mb-1">
                         <div class="card-home p-2">
                             <i class="bi bi-info-square"></i>
@@ -71,3 +71,12 @@
         </section>
     </article>
 {% endblock content %}
+
+
+{% block js %}
+    {% if js %} 
+        {% load static %}
+        <script src="{% static 'global/js/progress.bar.js' %}"></script>
+    {% endif %}
+{% endblock js %}
+
