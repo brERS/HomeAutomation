@@ -90,11 +90,17 @@ def light(request):
 
 
 def run_water_flow():
-    t = threading.Thread(target=start_water_flow)
+    t = threading.Thread(target=start_water_flow, name='water_flow')
     t.start()
 
 
 def start_water_flow():
+
+    global running_water_flow
+
+    running_water_flow = True
+
+    water_task_progress = 0
 
     GPIO.setwarnings(False)
 
@@ -104,21 +110,50 @@ def start_water_flow():
 
     GPIO.output(18, False)
 
-    for value in range(0, 101):
-        cache.set('water_long_task_progress', value, timeout=None)
+    while running_water_flow:
+        water_task_progress += 1
+        cache.set(
+            'water_long_task_progress',
+            water_task_progress,
+            timeout=None
+        )
         sleep(.6)
+
+        if water_task_progress >= 100:
+            running_water_flow = False
 
     GPIO.output(18, True)
 
 
+def check_tread_status():
+
+    tread_status = False
+
+    for t in threading.enumerate():
+        if t.name == 'water_flow':
+            tread_status = True
+            break
+
+    return tread_status
+
+
 def status_water_flow(request):
 
-    if cache.get('water_long_task_progress') is None:
+    if not check_tread_status():
         run_water_flow()
+
     return HttpResponse(int(cache.get('water_long_task_progress')))
 
 
 def abort_water_flow(request):
 
-    GPIO.output(18, True)
-    return HttpResponse(int(True))
+    global running_water_flow
+
+    running_water_flow = False
+
+    sleep(1)
+
+    if not check_tread_status():
+        return HttpResponse(int(True))
+    else:
+        return HttpResponse(int(False))
