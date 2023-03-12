@@ -1,0 +1,50 @@
+{% extends 'global/base.html' %}
+
+{% block title %} | Automações {% endblock title %}
+
+{% block content %}
+    {% load static %}
+    <article>
+        <section class="banner-sections raspberry">
+            <div class="banner-content p-5 col-md-5 mt-3">
+                <p class='banner-title'>
+                    Monitore o desempenho do
+                    <span class='banner-title-highlight'>Hardware</span>
+                </p>
+                <p class='banner-subtitle'>
+                    Veja o consumo de CPU, memória RAM e espaço em disco.
+                </p>
+            </div>
+        </section>
+        <section class="container-fluid">
+            <div class="row mt-2">      
+                <h1 class='col-md-6'>Dashboard</h1>
+                <h5 class='col-md-6 d-flex flex-row-reverse boot_time'>Ligado desde: {{ boot_time }}</h5>
+            </div>
+        </section>
+        <section class="container-fluid">
+            <div class="row">      
+                <div class="col-md-4 p-3">
+                    <div class="charts-container">
+                        <div id="main_cpu" class='charts'></div>                        
+                    </div>
+                </div>
+                <div class="col-md-4 p-3">
+                    <div class="charts-container">
+                        <div id="main_memory" class='charts'></div>
+                    </div>
+                </div>
+                <div class="col-md-4 p-3">
+                    <div class="charts-container">
+                        <div id="main_disk" class='charts'></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </article>    
+{% endblock content %}
+
+{% block js %}
+    {% load static %}
+    <script src="{% static 'global/js/dashboard.js' %}"></script>
+{% endblock js %}

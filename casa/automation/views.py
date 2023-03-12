@@ -1,7 +1,7 @@
 import threading
 from time import sleep
 
-import RPi.GPIO as GPIO
+# import RPi.GPIO as GPIO
 from django.core.cache import cache
 from django.http import HttpResponse
 from django.shortcuts import render

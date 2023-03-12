@@ -287,3 +287,35 @@ h1, h4, h5 {
     border-left: rgba(114,115,142) solid 1px;
     padding: 10px;
 }
+
+
+/* App raspberry */
+
+/* banner */
+.raspberry {   
+    background: url("/static/global/img/hardware.jpg");  
+    background-position: center;
+    background-repeat: no-repeat;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;  
+    z-index: -1;
+    min-height: 50vh; 
+}
+
+.charts {   
+    height: 17rem;
+    width: 100%;
+    overflow-x: hidden;
+}
+
+.charts-container {
+    background-image: linear-gradient(to bottom, rgba(114,115,142, 0.5), rgba(114,115,142,1));
+    color: #000;
+}
+
+.boot_time {
+    display: flex;
+    align-items: end;
+}
