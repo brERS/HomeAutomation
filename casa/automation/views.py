@@ -6,88 +6,100 @@ from django.core.cache import cache
 from django.http import HttpResponse
 from django.shortcuts import render
 
+from .models import Banner, SubNav, SubNavContent
+
 # Create your views here.
 
 
-def subnav():
+def banner():
+
+    banner = Banner.objects.get_active().first()
+
     return {
-        'home': {
-            'title': 'Home',
-            'url': 'automation:home',
-            'icon': 'bi-house-fill',
-        },
-        'water': {
-            'title': 'Água',
-            'url': 'automation:water',
-            'icon': 'bi-droplet-half',
-        },
-        'light': {
-            'title': 'Luzes',
-            'url': 'automation:light',
-            'icon': 'bi-lightbulb',
-        },
+        'title': banner.title,
+        'title_highlight': banner.title_highlight,
+        'title_finish': banner.title_finish,
+        'subtitle': banner.subtitle,
     }
+
+
+def subnav():
+
+    info_db = SubNav.objects.get_active().all()
+
+    subnav = {}
+
+    for nav in info_db:
+        subnav.update({
+            nav.title: {
+                'title': nav.title,
+                'url': nav.url,
+                'icon': nav.icon
+            }
+        })
+
+    return subnav
+
+
+def subnav_content(subnav_page):
+
+    contents_page = SubNavContent.objects.get_active().filter(title=subnav_page)
+
+    info = {}
+
+    for content in contents_page:
+        info.update({
+            content.id: {
+                'content': content.content,
+                'subcontent': content.subcontent,
+                'button': content.function_button,
+            }
+        })
+
+    return info
 
 
 def index(request):
 
-    cache.delete('water_long_task_progress')
+    page = 'Home'
     context = {
+        'banner': banner(),
         'tabs': subnav(),
         'content':  {
-            'info': {
-                'home': {
-                    'content': '''
-                        Navegue pelo menu acima para acessar as funcionalidades
-                        do sistema.
-                    ''',
-                    'subcontent': 'Descubra o que pode ser feito por você!',
-                },
-            },
+            'info': subnav_content(page),
         },
-        'home': True,
-        'js': False,
+        'is_home': True,
+        'additional_js': False,
     }
     return render(request, 'automation/pages/home.html', context)
 
 
 def water(request):
 
+    page = 'Água'
     context = {
+        'banner': banner(),
         'tabs': subnav(),
         'content':  {
-            'info': {
-                'agua': {
-                    'content': '''
-                        Bora colocar água fresquinha no potinho do baby dogs e
-                        deixar ele hidratado e feliz!
-                    ''',
-                    'subcontent': 'A torneira será aberta por 1 minuto.',
-                    'button': 'waterflow',
-                },
-            },
+            'info': subnav_content(page),
         },
-        'home': False,
-        'js': True,
+        'is_home': False,
+        'additional_js': True,
     }
     return render(request, 'automation/pages/home.html', context)
 
 
 def light(request):
+
+    page = 'Luzes'
     context = {
+        'banner': banner(),
         'tabs': subnav(),
         'content':  {
-            'info': {
-                'light': {
-                    'content': '''
-                        Em construção...
-                    ''',
-                    'subcontent': 'Em breve você poderá controlar as luzes da casa!',
-                },
-            },
+            'info': subnav_content(page),
         },
-        'home': False,
-        'js': False,
+        'is_home': False,
+        'additional_js': False,
     }
     return render(request, 'automation/pages/home.html', context)
 
